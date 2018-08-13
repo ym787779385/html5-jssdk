@@ -3,20 +3,24 @@
     <img src="../assets/firstpage/bc.jpg" alt="" class="firstPage_background">
     <div class='firstPage_top'>
       <img src="../assets/firstpage/TV.png" alt="" class="firstPage_tv">
-      <img src="../assets/firstpage/btnlTV.png" alt="" class="firstPage_btntv " v-if="istvanimate">
+      <img src="../assets/firstpage/btnlTV.png" alt="" class="firstPage_btnLtv " v-if="istvanimate">
       <img src="../assets/firstpage/btnTV.png" alt="" class="firstPage_btntv btntvanimate" @click="tvClick" v-if="!istvanimate">
       <img src="../assets/firstpage/xhua.jpg" alt="" class="firstPage_backgtv" :class="{'tvanimate': istvanimate  }" v-show='xuhuaImg'>
-      <img src="../assets/firstpage/Q1.jpg" alt="" class="firstPage_backgtv" :class="{'tvanimate2': istvanimate  }" v-show='!xuhuaImg'>
+      <img :src="oplists[indexId].imgurl" alt="" class="firstPage_backgtv" :class="{'tvanimate2': istvanimate  }" v-show='!xuhuaImg'>
     </div>
     <div class='firstPage_font' v-if="!flag">
-      <img src="../assets/firstpage/title.png" alt="" class="firstPage_title shake  shake-constant" >
+      <img src="../assets/firstpage/title.png" alt="" class="firstPage_title shake-slow  shake-constant" >
     </div>
     <ul class='optionList' v-if="flag" >
-      <li v-for="(item,index) in oplist" :key="index" class="itemstyle">
-        <span>{{item.icon}}</span>
-        {{item.optitle}}
-        </li>
+      <li v-for="(item,index) in oplists[indexId].question" :key="index" class="itemstyle" @click="selectClick(oplists[indexId].question[index])">
+        <span :style="{backgroundImage: backgroundImg }" v-if="index != selectedId" class=" ">{{item.icon}}</span>
+        <span :style="{backgroundImage: activebackgroundImg }" class="itemstyle_activeFont shake-opacity shake-constant" v-if="index === selectedId">{{item.icon}}</span>
+        <p class='itemstyle_optitle' :class="{'itemstyle_active': index === selectedId}">{{item.optitle}}</p>
+      </li>
     </ul>
+    <div class="bottomBtn">
+      <img src="../assets/firstpage/switchBtn.png" alt="" class="bottomBtn_switchBtn"  v-show='!xuhuaImg' @click="pagesWitch">
+    </div>
     
   </div>
 </template>
@@ -28,43 +32,175 @@ interface option{
   icon: string;
   optitle: string;
   score: number;
+  questionId: number;
+}
+interface options{
+  imgurl: string;
+  question: Array<option>;
 }
 
 @Component({
   components: {},
 })
-export default class Home extends Vue {
+export default class About extends Vue {
   private flag: boolean = false;
   private istvanimate: boolean = false;
   private xuhuaImg: boolean = true;
-  private oplist: Array<option> =[
+  private indexId: number = 0;
+  private scoreItem: number = 0;
+  private selectedId: number = -1;
+  private backgroundImg: string = "url(" + require("../assets/firstpage/seltect.png") + ") "
+  private activebackgroundImg: string = "url(" + require("../assets/firstpage/selected.png") + ") "
+  private oplists: Array<options> =[
     {
-      icon: 'A',
-      optitle: '从来不带',
-      score: 5,
+      imgurl: require( "../assets/firstpage/Q1.jpg"),
+      question: [
+        {
+          icon: 'A',
+          optitle: '从来不带',
+          score: 3,
+          questionId: 1,
+        },
+        {
+          icon: 'B',
+          optitle: '偶尔带',
+          score: 2,
+          questionId: 2,
+        },
+        {
+          icon: 'C',
+          optitle: '经常借朋友的',
+          score: 1,
+          questionId: 3,
+        },
+      ]
     },
     {
-      icon: 'B',
-      optitle: '偶尔带',
-      score: 5,
+      imgurl: require( "../assets/firstpage/Q2.jpg"),
+      question: [
+        {
+          icon: 'A',
+          optitle: '早已不会',
+          score: 3,
+          questionId: 1,
+        },
+        {
+          icon: 'B',
+          optitle: '偶尔会',
+          score: 2,
+          questionId: 2,
+        },
+        {
+          icon: 'C',
+          optitle: '每次都会',
+          score: 1,
+          questionId: 3,
+        },
+      ]
     },
-    {
-      icon: 'C',
-      optitle: '家里内裤',
-      score: 5,
+     {
+      imgurl: require( "../assets/firstpage/Q3.jpg"),
+      question: [
+        {
+          icon: 'A',
+          optitle: '美食',
+          score: 3,
+          questionId: 1,
+        },
+        {
+          icon: 'B',
+          optitle: '家人朋友',
+          score: 2,
+          questionId: 2,
+        },
+        {
+          icon: 'C',
+          optitle: '更好的职业发展',
+          score: 1,
+          questionId: 3,
+        },
+      ]
     },
+     {
+      imgurl: require( "../assets/firstpage/Q4.jpg"),
+      question: [
+        {
+          icon: 'A',
+          optitle: '丰富的文娱生活',
+          score: 3,
+          questionId: 1,
+        },
+        {
+          icon: 'B',
+          optitle: '优秀教育资源',
+          score: 2,
+          questionId: 2,
+        },
+        {
+          icon: 'C',
+          optitle: '宜居的环境',
+          score: 1,
+          questionId: 3,
+        },
+      ]
+    },
+     {
+      imgurl: require( "../assets/firstpage/Q5.jpg"),
+      question: [
+        {
+          icon: 'A',
+          optitle: '当然，本宝宝是学霸',
+          score: 3,
+          questionId: 1,
+        },
+        {
+          icon: 'B',
+          optitle: '还在努力的路上',
+          score: 2,
+          questionId: 2,
+        },
+        {
+          icon: 'C',
+          optitle: 'PTE? 从没听说过',
+          score: 1,
+          questionId: 3,
+        },
+      ]
+    },
+    
+    
   ]
 
   private tvClick() {
-    this.istvanimate = true
-    
+    this.istvanimate = true;
     setTimeout(() => {
       this.xuhuaImg = false;
       this.flag = true;
-      console.log(this.flag)
+      console.log(this.flag);
     },1800);
-    console.log(this.flag)
+    console.log(this.flag);
    
+  }
+
+  private selectClick(optionItem: option){
+    this.scoreItem = optionItem.score;
+    this.selectedId = optionItem.questionId - 1;
+  }
+
+  private pagesWitch() {
+    console.log("scoreItem"+this.scoreItem)
+    if(this.indexId <= this.oplists.length -2 && this.scoreItem != 0){
+      this.indexId++ ;
+      this.$store.commit('selectOption',this.scoreItem);
+      console.log("score is "+ this.$store.state.score)
+    } else if( this.indexId == this.oplists.length -1){
+      this.$store.commit('selectOption',this.scoreItem);
+      console.log("sum score is "+ this.$store.state.score);
+      this.scoreItem = 0;
+      this.$router.push('/result');
+    }
+    this.scoreItem = 0;
+    this.selectedId = -1;
   }
 
 }
@@ -72,6 +208,11 @@ export default class Home extends Vue {
 </script>
 
 <style lang='less' scoped>
+ul,li,p{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
   .firstPage{
    
     .firstPage_background{
@@ -86,24 +227,30 @@ export default class Home extends Vue {
       left: 0;
       z-index: 20;
       .firstPage_tv{
-        width: 80vw;
-        margin: 0 10vw;
-        margin-top: 12vw;
+        width: 94vw;
+        margin: 0 3vw;
+        margin-top: 9vw;
       }
       .firstPage_btntv{
         position: relative;
-        top: -41.1vw;
-        left: 47.5vw;
-        width: 5vw;
+        top: -48vw;
+        left: 47.2vw;
+        width: 5.5vw;
+      }
+      .firstPage_btnLtv{
+        position: relative;
+        top: -47.7vw;
+        left: 47.2vw;
+        width: 5.5vw;
       }
       .btntvanimate{
          animation: btnAnimate 0.5s linear   infinite alternate;
       }
       .firstPage_backgtv{
-        width: 59.6vw;
+        width: 70.6vw;
         position: relative;
-        top: -48vw;
-        left: 11.5vw;
+        top: -56.5vw;
+        left: 5vw;
       }
       .tvanimate{
         animation: tvAnimate 2s ease-out 1s 1;
@@ -125,20 +272,51 @@ export default class Home extends Vue {
       }
     }
     .optionList{
-      width: 70vw;
+      width: 80vw;
       position: absolute;
       top: 50vh;
-      left: 15vw;
+      left: 10vw;
       z-index: 20;
-      font-size: 24px;
+      font-size: 22px;
       .itemstyle{
-        height: 10vh;
-        line-height: 10vh;
+        width: 80vw;
+        height: 11vw;
+        line-height: 11vw;
+        margin-bottom: 5vh;
+        display: flex;
+        justify-content: space-around;
+        .itemstyle_optitle{
+          margin: 0;
+          width: 36vh;
+          text-align: center;
+          border: 2px solid rgb(85, 84, 84);
+          border-radius: 30px;
+        }
+         .itemstyle_active{
+          background-color: #ffd700;
+          border: 2px solid #ffd700;
+        }
+        .itemstyle_activeFont{
+          color: #fff;
+        }
+
       }
       .itemstyle>span{
         display: inline-block;
-        width: 40px;
-
+        width: 11vw;
+        text-align: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+       
+      }
+    }
+    .bottomBtn{
+      position: absolute;
+      bottom: 9vh;
+      right: 10vw;
+      z-index: 20;
+      .bottomBtn_switchBtn{
+        width: 30vw;
       }
     }
 

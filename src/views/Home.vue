@@ -102,8 +102,8 @@ export default class Home extends Vue {
           width: 55%;
           display: inline-block;
           position: relative;
-          transform: rotate(35deg);
-          animation:  animatedown 1.9s ease-in 2.5s   infinite ;
+          transform: rotate(15deg);
+          animation:  animatedown 1.9s ease-in 1.5s   infinite ;
         }
         .home_Ladel_left2{
           width: 75%;

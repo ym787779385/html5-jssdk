@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "npm run serve",
+    "serve": "vue-cli-service serve --disableHostCheck",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint -fix",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/html2canvas": "0.0.33",
     "axios": "^0.18.0",
     "csshake": "^1.5.3",
     "vue": "^2.5.16",

@@ -21,12 +21,7 @@
     </ul>
     <div class="home_bottom">
       <img src="../assets/home/btn.png" alt="" class="home_bottom_btn " @click="pageJump">
-    </div>
-    <!-- <div class="home_hand">
-      <img src="../assets/home/handleft.png" alt="" class="home_hand_left">
-      <img src="../assets/home/hand.png" alt="" class="home_hand_btn">
-    </div> -->
-   
+    </div> 
   </div>
 </template>
 
@@ -37,193 +32,203 @@ import axios from 'axios';
 import wx from 'wx-sdk-ts'
 
 
-
 @Component({
   components: {
     HelloWorld,
   },
 })
 export default class Home extends Vue {
-  // mounted() {
-  //  axios.get('/user')
-  //   .then( success => {
-  //     console.log(success)
-  //   })
-  
-  // }
   private pageJump() {
     this.$router.push('/about');
   }
 }
 </script> 
 <style lang="less" scpped>
-  ul,li{
+  ul,li {
     padding: 0;
     margin: 0;
     list-style: none;
   }
-  .home{
+
+  .home {
     width: 100vw;
     height: 100vh;
     background-color: #ffd700;
     overflow: hidden;
-    .home_logo{
+    .home_logo {
       margin-left: 15pt;
       margin-top: 15pt;
       height: 6vh;
     }
-    .home_title{
+    .home_title {
       width: 94%;
       margin: 0 3%;
       position: relative;
       z-index: 100;
-      .home_title_bac{
+      .home_title_bac {
         width: 94vw;
       }
     }
-    .home_labellist{
+    .home_labellist {
       display: flex;
       justify-content: center;
       position: absolute;
       top: 26vh;
       left: 0px;
-       
-      li{
+      li {
         width: 14%;
         text-align: right;
-        .home_Ladel_left{
+        .home_Ladel_left {
           width: 70%;
           display: inline-block;
           position: relative;
           transform: rotate(-40deg);
-          animation:  animatedown 2.0s ease-in 0.2s  infinite ;
+          animation: animatedown 2.0s ease-in 0.2s infinite;
         }
-        .home_Ladel_left1{
+        .home_Ladel_left1 {
           width: 55%;
           display: inline-block;
           position: relative;
           transform: rotate(15deg);
-          animation:  animatedown 1.9s ease-in 1.5s   infinite ;
+          animation: animatedown 1.9s ease-in 1.5s infinite;
         }
-        .home_Ladel_left2{
+        .home_Ladel_left2 {
           width: 75%;
           display: inline-block;
           position: relative;
           transform: rotate(-35deg);
-          animation:  animatedown 1.8s ease-in 2.0s  infinite ;
+          animation: animatedown 1.8s ease-in 2.0s infinite;
         }
-        .home_Ladel_left3{
+        .home_Ladel_left3 {
           width: 75%;
           display: inline-block;
           position: relative;
           transform: rotate(-10deg);
-          animation:  animatedown 1.9s ease-in 2.0s  infinite ;
+          animation: animatedown 1.9s ease-in 2.0s infinite;
         }
-         .home_Ladel_left4{
+        .home_Ladel_left4 {
           width: 62%;
           display: inline-block;
           position: relative;
           transform: rotate(26deg);
-          animation:  animatedown 1.8s ease-in 0.4s  infinite ;
+          animation: animatedown 1.8s ease-in 0.4s infinite;
         }
       }
-
     }
-    .home_label{
+    .home_label {
       display: flex;
       position: relative;
       top: -24vh;
       z-index: 10;
       justify-content: center;
       height: 55vh;
-     
-      li{
+      li {
         width: 14%;
         text-align: right;
-        .home_Ladel_left{
+        .home_Ladel_left {
           width: 50%;
           display: inline-block;
           position: relative;
           transform: rotate(10deg);
-          animation:  animatedown 1.8s ease-in 0.6s   infinite ;
+          animation: animatedown 1.8s ease-in 0.6s infinite;
         }
-        .home_Ladel_left1{
+        .home_Ladel_left1 {
           width: 53%;
           display: inline-block;
           position: relative;
           transform: rotate(-20deg);
-          animation:  animatedown 2.0s ease-in 2.5s   infinite ;
+          animation: animatedown 2.0s ease-in 2.5s infinite;
         }
-        .home_Ladel_left2{
+        .home_Ladel_left2 {
           width: 60%;
           display: inline-block;
           position: relative;
           transform: rotate(10deg);
-          animation:  animatedown 1.5s ease-in 0.3s  infinite ;
+          animation: animatedown 1.5s ease-in 0.3s infinite;
         }
-        .home_Ladel_left3{
+        .home_Ladel_left3 {
           width: 58%;
           display: inline-block;
           position: relative;
           transform: rotate(-40deg);
-          animation:  animatedown 1.8s ease-in 1.2s  infinite ;
+          animation: animatedown 1.8s ease-in 1.2s infinite;
         }
-         .home_Ladel_left4{
+        .home_Ladel_left4 {
           width: 90%;
           display: inline-block;
           position: relative;
           transform: rotate(15deg);
-          animation:  animatedown 1.9s ease-in 0.9s  infinite ;
+          animation: animatedown 1.9s ease-in 0.9s infinite;
         }
       }
     }
-    .home_bottom{
+    .home_bottom {
       position: relative;
       z-index: 400;
       top: -24vh;
       margin: 0 24%;
-      .home_bottom_btn{
+      .home_bottom_btn {
         width: 52vw;
-       
       }
     }
-    .home_hand{
+    .home_hand {
       position: relative;
       z-index: 400;
-      top: -26vh; 
-      .home_hand_left{
+      top: -26vh;
+      .home_hand_left {
         width: 9%;
         position: absolute;
         left: 37%;
         top: -27px;
-        animation:  handleftanimate 0.8s linear 0.1s  infinite alternate;
+        animation: handleftanimate 0.8s linear 0.1s infinite alternate;
       }
-      .home_hand_btn{
+      .home_hand_btn {
         width: 14%;
         position: absolute;
         left: 42vw;
         top: -20px;
-        animation:  handanimate 0.8s linear 0.1s  infinite alternate;
-        
+        animation: handanimate 0.8s linear 0.1s infinite alternate;
       }
     }
-    
   }
-@keyframes animatedown {
-  0% {top: 0; }
-  48% {top:40vh; opacity: 0.7;}
-  55% {top:38vh; opacity: 0.7;}
-  100% {top:70vh; opacity: 0;}
-}
 
-@keyframes handanimate {
-  0%{top:-10px;}
-  100%{ top: -22px};
-}
-@keyframes handleftanimate {
-  0%{width: 8%;left:38%}
-  100%{width: 10%;left:37%};
-}
+  @keyframes animatedown {
+    0% {
+      top: 0;
+    }
+    48% {
+      top: 40vh;
+      opacity: 0.7;
+    }
+    55% {
+      top: 38vh;
+      opacity: 0.7;
+    }
+    100% {
+      top: 70vh;
+      opacity: 0;
+    }
+  }
+
+  @keyframes handanimate {
+    0% {
+      top: -10px;
+    }
+    100% {
+      top: -22px;
+    }
+  }
+
+  @keyframes handleftanimate {
+    0% {
+      width: 8%;
+      left: 38%
+    }
+    100% {
+      width: 10%;
+      left: 37%;
+    }
+  }
 
   
 

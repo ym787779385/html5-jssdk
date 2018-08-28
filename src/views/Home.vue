@@ -30,7 +30,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import axios from 'axios';
 import wx from 'wx-sdk-ts'
-
+import { setImmediate } from 'timers';
+import { encode } from 'punycode';
 
 @Component({
   components: {
@@ -38,6 +39,13 @@ import wx from 'wx-sdk-ts'
   },
 })
 export default class Home extends Vue {
+  private userList: Array<string> = [];
+  mounted() {
+  var url = window.location.href;
+  // console.log('授权后的地址为：'+ decodeURIComponent(url));
+  this.$store.commit('getUserInfo',decodeURIComponent(url));
+  console.log('获取到用户的信息为：'+ this.$store.state.userinfo);
+  }
   private pageJump() {
     this.$router.push('/about');
   }

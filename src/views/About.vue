@@ -29,7 +29,7 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
 
-interface option{
+interface Option{
   icon: string;
   optitle: string;
   score: number;
@@ -37,7 +37,7 @@ interface option{
 }
 interface options{
   imgurl: string;
-  question: Array<option>;
+  question: Array<Option>;
 }
 
 @Component({
@@ -50,9 +50,9 @@ export default class About extends Vue {
   private indexId: number = 0;
   private scoreItem: number = 0;
   private selectedId: number = -1;
-  private inputValue: string = ''
-  private backgroundImg: string = "url(" + require("../assets/firstpage/seltect.png") + ") "
-  private activebackgroundImg: string = "url(" + require("../assets/firstpage/selected.png") + ") "
+  private inputValue: string = '';
+  private backgroundImg: string = "url(" + require("../assets/firstpage/seltect.png") + ") ";
+  private activebackgroundImg: string = "url(" + require("../assets/firstpage/selected.png") + ") ";
   private oplists: Array < options > = [{
       imgurl: require("../assets/firstpage/Q1.jpg"),
       question: [{
@@ -73,7 +73,7 @@ export default class About extends Vue {
           score: 1,
           questionId: 3,
         },
-      ]
+      ],
     },
     {
       imgurl: require("../assets/firstpage/Q2.jpg"),
@@ -95,7 +95,7 @@ export default class About extends Vue {
           score: 1,
           questionId: 3,
         },
-      ]
+      ],
     },
     {
       imgurl: require("../assets/firstpage/Q3.jpg"),
@@ -117,7 +117,7 @@ export default class About extends Vue {
           score: 1,
           questionId: 3,
         },
-      ]
+      ],
     },
     {
       imgurl: require("../assets/firstpage/Q4.jpg"),
@@ -139,7 +139,7 @@ export default class About extends Vue {
           score: 1,
           questionId: 3,
         },
-      ]
+      ],
     },
     {
       imgurl: require("../assets/firstpage/Q5.jpg"),
@@ -161,12 +161,13 @@ export default class About extends Vue {
           score: 1,
           questionId: 3,
         },
-      ]
+      ],
     },
 
 
   ]
 
+  
   private tvClick() {
     if (this.inputValue != '') {
       this.istvanimate = true;
@@ -179,8 +180,8 @@ export default class About extends Vue {
       this.$store.commit('inputName', this.inputValue);
     }
   }
-
-  private selectClick(optionItem: option) {
+   
+  private selectClick(optionItem: Option) {
     this.scoreItem = optionItem.score;
     this.selectedId = optionItem.questionId - 1;
   }
@@ -199,6 +200,7 @@ export default class About extends Vue {
     this.scoreItem = 0;
     this.selectedId = -1;
   }
+  
 
 }
   

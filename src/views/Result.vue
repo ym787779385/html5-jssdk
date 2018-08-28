@@ -1,7 +1,7 @@
 <template>
   <div id="result">
     <div class='top'>
-      <img src="../assets/firstpage/logo.png" alt="" class="headImg">
+      <img :src="imgUrl" alt="" class="headImg">
       <p class="headtitle">
         如果不移民，
         <span>{{userName}}</span>
@@ -24,22 +24,24 @@
   import {Component, Vue} from 'vue-property-decorator'
   import Axios from 'axios';
   import html2canvas from 'html2canvas';
-  import {createQrCodeImg} from "../utils/wxqrcode.js"
+  // import {createQrCodeImg} from "../utils/wxqrcode.js"
   interface resultItem{
     score: number,
     conts: string,
   }
 
+  const QrCodeImg = require("../utils/wxqrcode.js")
   @Component({})
 
   export default class Result extends Vue{
+    private imgUrl: string = '';
     private imgdate: any ='';
     private resultId: number = 0;
     private userName: string = '画画';
     private msg: string = '套路是我学的，但希望你过的好是认真的，希望你未来的每一天都活成幸福的样子。';
     private backgroundImg: string = "url(" + require("../assets/firstpage/resultbac.png") + ") "
     private resultList: Array < resultItem > = [{
-        score: 5,
+      score: 5,
         conts: '回国发展，大好前程，创业风头，等着你呢。留澳洲干嘛'
       },
       {
@@ -85,16 +87,22 @@
     ]
 
     mounted() {
-      this.imgdate = createQrCodeImg('http://www.qiusuoweb.com',{'size':80});
+      let url = window.location.href.split('#')[0];
+      let userId = this.$store.state.userinfo[0];
+      let shareLink = url + '?from=' + userId;
+      console.log("shareLink: "+shareLink);
+      console.log(QrCodeImg.createQrCodeImg)
+      this.imgdate = QrCodeImg.createQrCodeImg(shareLink,{'size':80});
       this.userName = this.$store.state.name;
-      var score = this.$store.state.score;
+      let score = this.$store.state.score;
       this.resultList.forEach((value, index, array) => {
         if (array[index].score === score)
           this.resultId = index;
       });
-    }
-
-    
+      this.imgUrl = this.$store.state.userinfo[2];
+      console.log(this.imgUrl+'图片');
+      console.log("用户的信息:"+ this.$store.state.userinfo);
+    }  
   }
 
 </script>
